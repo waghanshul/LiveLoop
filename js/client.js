@@ -13,7 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
         messageContainer.append(messageElement);
     };
 
-    const name = prompt("Enter your name to join");
+    let name = null;
+
+    // Prompt user for name until a valid input is given
+    while (!name) {
+        name = prompt("Enter your name to join").trim();
+    }
+    
     socket.emit('new-user-joined', name);
 
     socket.on('user-joined', name => {
@@ -26,9 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const message = messageInput.value;
-        append(`You: ${message}`, 'right');
-        socket.emit('send', message);
-        messageInput.value = ''; // Clear the input field after sending
+        const message = messageInput.value.trim();
+        if (message) { // Only send if there's a valid message
+            append(`You: ${message}`, 'right');
+            socket.emit('send', message);
+            messageInput.value = ''; // Clear the input field after sending
+        }
     });
 });
