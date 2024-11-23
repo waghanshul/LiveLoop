@@ -1,42 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
     const socket = io('http://localhost:8080');
-
     const form = document.getElementById('send-container');
     const messageInput = document.getElementById('messageInp');
     const messageContainer = document.querySelector(".container");
 
-    const append = (message, position) => {
+    const appendMessage = (message, position) => {
         const messageElement = document.createElement('div');
-        messageElement.innerText = message;
-        messageElement.classList.add('message');
-        messageElement.classList.add(position);
-        messageContainer.append(messageElement);
+        messageElement.textContent = message;
+        messageElement.className = `message ${position}`;
+        messageContainer.appendChild(messageElement);
     };
 
-    let name = null;
-
-    // Prompt user for name until a valid input is given
-    while (!name) {
-        name = prompt("Enter your name to join").trim();
+    let userName;
+    while (!userName) {
+        userName = prompt("Enter your name to join")?.trim();
     }
-    
-    socket.emit('new-user-joined', name);
 
-    socket.on('user-joined', name => {
-        append(`${name} joined the chat`, 'center');
-    });
+    socket.emit('new-user-joined', userName);
 
-    socket.on('recieve', data => {
-        append(`${data.name}: ${data.message}`, 'left');
-    });
+    socket.on('user-joined', name => appendMessage(`${name} joined the chat`, 'center'));
+    socket.on('receive', ({ name, message }) => appendMessage(`${name}: ${message}`, 'left'));
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
         const message = messageInput.value.trim();
-        if (message) { // Only send if there's a valid message
-            append(`You: ${message}`, 'right');
+        if (message) {
+            appendMessage(`You: ${message}`, 'right');
             socket.emit('send', message);
-            messageInput.value = ''; // Clear the input field after sending
+            messageInput.value = '';
         }
     });
 });
