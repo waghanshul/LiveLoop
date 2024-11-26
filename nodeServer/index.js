@@ -2,23 +2,42 @@ const io = require('socket.io')(8080);
 
 const users = {};
 
-io.on('connection', socket => {
-    // Log when a new user connects
-    console.log("A user connected with ID:", socket.id);
+// Constants for event names
+const EVENTS = {
+    CONNECTION: 'connection',
+    NEW_USER_JOINED: 'new-user-joined',
+    SEND: 'send',
+    RECEIVE: 'receive',
+    USER_JOINED: 'user-joined',
+    DISCONNECT: 'disconnect'
+};
 
-    // Listen for 'new-user-joined' event
-    socket.on('new-user-joined', name => {
-        console.log("New user joined: " + name);  
-        users[socket.id] = name;  
-        socket.broadcast.emit('user-joined', name); 
+io.on(EVENTS.CONNECTION, (socket) => {
+    console.log(`A user connected with ID: ${socket.id}`);
+
+    // Handle a new user joining
+    socket.on(EVENTS.NEW_USER_JOINED, (name) => {
+        if (name) {
+            console.log(`New user joined: ${name}`);
+            users[socket.id] = name;
+            socket.broadcast.emit(EVENTS.USER_JOINED, name);
+        }
     });
 
-    socket.on('send', message => {
-        socket.broadcast.emit('recieve', { message: message, name: users[socket.id] });
+    // Handle message sending
+    socket.on(EVENTS.SEND, (message) => {
+        const senderName = users[socket.id];
+        if (message && senderName) {
+            socket.broadcast.emit(EVENTS.RECEIVE, { message, name: senderName });
+        }
     });
 
-    socket.on('disconnect', () => {
-        console.log("User disconnected:", users[socket.id]);  // Log when a user disconnects
-        delete users[socket.id];  // Clean up the user from the list
+    // Handle user disconnection
+    socket.on(EVENTS.DISCONNECT, () => {
+        const disconnectedUser = users[socket.id];
+        if (disconnectedUser) {
+            console.log(`User disconnected: ${disconnectedUser}`);
+            delete users[socket.id];
+        }
     });
 });
