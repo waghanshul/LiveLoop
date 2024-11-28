@@ -7,22 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const appendMessage = (message, position) => {
         const messageElement = document.createElement('div');
         messageElement.textContent = message;
-        messageElement.className = `message ${position}`;
+        messageElement.classList.add('message', position);
         messageContainer.appendChild(messageElement);
     };
 
-    let userName;
-    while (!userName) {
-        userName = prompt("Enter your name to join")?.trim();
-    }
-
-    socket.emit('new-user-joined', userName);
+    const userName = prompt("Enter your name to join")?.trim();
+    if (userName) socket.emit('new-user-joined', userName);
 
     socket.on('user-joined', name => appendMessage(`${name} joined the chat`, 'center'));
     socket.on('receive', ({ name, message }) => appendMessage(`${name}: ${message}`, 'left'));
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
         const message = messageInput.value.trim();
         if (message) {
             appendMessage(`You: ${message}`, 'right');
