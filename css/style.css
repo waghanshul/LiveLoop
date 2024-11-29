@@ -5,7 +5,7 @@
     height: 50px;
 }
 
-.container{
+.container {
     max-width: 955px;
     border: 2px solid black;
     margin: auto;
@@ -13,52 +13,79 @@
     padding: 33px;
     overflow-y: auto;
     margin-bottom: 23px;
+    background-color: #f9f9f9;
+    /* Added subtle background for clarity */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Optional: Adds depth */
 }
 
-.message{
+.message {
     background-color: rgb(180, 177, 177);
     width: 24%;
     padding: 10px;
     margin: 17px 12px;
     border: 2px solid black;
     border-radius: 10px;
+    word-wrap: break-word;
+    /* Ensures long text wraps */
 }
 
-.left{
+.left {
     float: left;
     clear: both;
-
 }
 
-.right{
+.right {
     float: left;
     clear: both;
-
 }
 
-#send-container{
+#send-container {
     display: block;
     margin: auto;
     text-align: center;
     max-width: 985px;
     width: 100%;
+    padding-top: 15px;
+    /* Added spacing for better aesthetics */
 }
 
-#messageInp{
+#messageInp {
     width: 92%;
     border: 2px solid black;
     border-radius: 6px;
     height: 34px;
+    padding: 0 8px;
+    /* Adds padding for better text input appearance */
+    font-size: 14px;
+    /* Optional: Improved text visibility */
 }
 
-.btn{
+.btn {
     cursor: pointer;
     border: 2px solid black;
     border-radius: 6px;
     height: 34px;
+    background-color: #6d27ef;
+    /* Adds color to the button */
+    color: white;
+    /* Text color for better visibility */
+    font-weight: bold;
+    /* Optional: Emphasizes button text */
+    transition: background-color 0.3s ease;
+    /* Smooth hover effect */
 }
 
-body{
+.btn:hover {
+    background-color: #501bb5;
+    /* Darker shade for hover state */
+}
+
+body {
     height: 100vh;
-    background-image: linear-gradient(rgb(255,255,255), rgb(109,39,239));
+    margin: 0;
+    /* Ensures no unintended margin */
+    font-family: Arial, sans-serif;
+    /* Optional: Sets a modern font */
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(109, 39, 239));
 }
