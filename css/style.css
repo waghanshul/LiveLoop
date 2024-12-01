@@ -63,7 +63,7 @@
     background-color: #6d27ef; /* Adds color to the button */
     color: white; /* Text color for better visibility */
     font-weight: bold; /* Optional: Emphasizes button text */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
+    transition: background-color 0.3s ease-in; /* Smooth hover effect */
 }
 
 .btn:hover {
