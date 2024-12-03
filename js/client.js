@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.emit('new-user-joined', userName);
 
     socket.on('user-joined', name => appendMessage(`${name} joined the chat`, 'center'));
-    socket.on('receive', ({ name, message }) => (`${name}: ${message}`, 'left'));
+    socket.on('receive', ({ name, message }) => appendMessage(`${name}: ${message}`, 'left'));
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
