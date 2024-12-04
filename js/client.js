@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const appendMessage = (message, position) => {
         const messageElement = document.createElement('div');
-        messageElement.textContent = message;
+        messageElement.textContent = 
         messageElement.className = `message ${position}`;
         messageContainer.appendChild(messageElement);
     };
