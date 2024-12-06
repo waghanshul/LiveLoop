@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const socket = io('http://localhost:8080');
     const form = document.getElementById('send-container');
     const messageInput = document.getElementById('messageInp');
-    const messageContainer = document.querySelector(".container");
+    const messageContainer = document.query(".container");
 
     const appendMessage = (message, position) => {
         const messageElement = document.createElement('div');
