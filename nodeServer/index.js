@@ -14,7 +14,7 @@ io.on('connection', socket => {
     });
 
     socket.on('send', message => {
-        socket.broadcast.emit('recieve', { message: message, name: users[socket.id] });
+        socket.broadcast.emit('send', { message: message, name: users[socket.id] });
     });
 
     socket.on('disconnect', () => {
