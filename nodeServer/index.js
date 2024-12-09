@@ -8,7 +8,7 @@ io.on('connection', socket => {
 
     // Listen for 'new-user-joined' event
     socket.on('new-user-joined', name => {
-        console.log(" user joined: " + name);  
+        console.log("New user joined: " + name);  
         users[socket.id] = name;  
         socket.broadcast.emit('user-joined', name); 
     });
