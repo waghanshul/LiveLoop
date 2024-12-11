@@ -18,7 +18,7 @@ io.on('connection', socket => {
     });
 
     socket.on('disconnect', () => {
-        console.log("User connected:", users[socket.id]);  // Log when a user disconnects
+        console.log("User disconnected:", users[socket.id]);  // Log when a user disconnects
         delete users[socket.id];  // Clean up the user from the list
     });
 });
