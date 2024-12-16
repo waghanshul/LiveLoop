@@ -17,7 +17,7 @@ io.on('connection', socket => {
         socket.broadcast.emit('receive', { message: message, name: users[socket.id] });
     });
 
-    socket.on('disconnect', () => {
+    on('disconnect', () => {
         console.log("User disconnected:", users[socket.id]);  // Log when a user disconnects
         delete users[socket.id];  // Clean up the user from the list
     });
