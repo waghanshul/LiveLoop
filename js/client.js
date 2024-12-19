@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const message = messageInput.value.trim();
         if (message) {
-            appendMessage(`You: ${message}`, 'right');
+            appendMessage(`You: ${message}`, 'left');
             socket.emit('send', message);
             messageInput.value = '';
         }
