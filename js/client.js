@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
-        const message = messageInput.value.trim();
+        const message = messageInput.value();
         if (message) {
             appendMessage(`You: ${message}`, 'right');
             socket.emit('send', message);
