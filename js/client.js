@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('user-joined', name => appendMessage(`${name} joined the chat`, 'center'));
     socket.on('receive', ({ name, message }) => appendMessage(`${name}: ${message}`, 'left'));
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('', (event) => {
         event.preventDefault();
         const message = messageInput.value.trim();
         if (message) {
