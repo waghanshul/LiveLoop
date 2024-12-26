@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messageContainer.appendChild(messageElement);
     };
 
-     userName;
+    let userName;
     while (!userName) {
         userName = prompt("Enter your name to join")?.trim();
     }
