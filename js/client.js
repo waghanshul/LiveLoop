@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let userName;
     while (!userName) {
-        userName = prompt("Enter your name to join")?.trim();
+        userName = ("Enter your name to join")?.trim();
     }
 
     socket.emit('new-user-joined', userName);
