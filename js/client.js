@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userName = prompt("Enter your name to join")?.trim();
     }
 
-    socket.emit('new-user-joined', userName);
+    socket.emit('new--joined', userName);
 
     socket.on('user-joined', name => appendMessage(`${name} joined the chat`, 'center'));
     socket.on('receive', ({ name, message }) => appendMessage(`${name}: ${message}`, 'left'));
